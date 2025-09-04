@@ -1,3 +1,8 @@
+"""
+Command-line Hangman game.
+Handles user interaction and plays game using HangmanEngine.
+"""
+
 import time
 import sys
 import msvcrt  # Windows-specific module for keyboard input
@@ -5,10 +10,10 @@ from hangman import HangmanEngine
 
 
 def play_game():
-    """Run the Hangman command-line interface game."""
+    """Run Hangman CLI game."""
     print("Welcome to Hangman!\n")
 
-    # Ask the player to choose difficulty level
+    # Select difficulty level
     while True:
         level = input("Choose level - (b)asic or (i)ntermediate (b/i): ").strip().lower()
         if level in ("b", "basic"):
@@ -27,18 +32,18 @@ def play_game():
 
         # Main guessing loop
         while not game.is_won() and not game.is_lost():
-            print("Word: ", game.revealed)             # Show current word state
+            print("Word: ", game.revealed)
             print("Lives remaining:", game.remaining_lives)
             print(f"You have {game.time_limit} seconds to enter a letter...")
 
             guess = None
             start_time = time.time()
 
-            # Input loop with countdown timer
+            # Input loop with countdown
             while True:
                 if msvcrt.kbhit():
                     guess = msvcrt.getwch()
-                    if guess == "\r":  # ignore Enter key
+                    if guess == "\r":
                         continue
                     break
 
@@ -71,7 +76,7 @@ def play_game():
         else:
             print("\nGame Over! The word was:", game.answer)
 
-        # Ask if player wants to play again
+        # Ask to play again
         again = input("\nPlay again? (y/n): ").strip().lower()
         if again != "y":
             print("Thanks for playing. Goodbye!")

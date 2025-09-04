@@ -1,3 +1,7 @@
+"""
+Unit tests for HangmanEngine using Pytest.
+"""
+
 import pytest
 from hangman import HangmanEngine
 
