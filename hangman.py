@@ -1,24 +1,24 @@
 """
 Hangman game engine module.
-Contains HangmanEngine class for game logic, guess handling, lives, and timers.
+Includes HangmanEngine class for game logic/guess handling/lives/timers.
 """
 
 import random
 import threading
 
 
-class HangmanEngine:   #pylint: disable=too-many-instance-attributes,too-many-arguments,too-many-positional-arguments
-    """Hangman game engine class for managing game logic."""
+class HangmanEngine:  # pylint: disable=too-many-instance-attributes,too-many-arguments,too-many-positional-arguments
+    """Game logic game engine class of Hangman game."""
 
     def __init__(self, words=None, phrases=None, lives=6, time_limit=15, level="basic"):
         """
         Initialize the game engine.
 
-        :param words: list of single words for basic mode
-        :param phrases: list of multi-word phrases for intermediate mode
-        :param lives: number of allowed wrong guesses
-        :param time_limit: seconds allowed per guess
-        :param level: "basic" or "intermediate"
+    param words: single words for basic mode
+        param phrases: intermediate mode multi-word phrases list.
+        param lives: amount of incorrect guesses allowed.
+        param time_limit seconds per guess
+        param level: basic or intermediate
         """
         self.words = words or ["python", "hangman", "testing", "pytest", "unittest"]
         self.phrases = phrases or ["open ai", "machine learning", "unit testing"]
@@ -33,7 +33,7 @@ class HangmanEngine:   #pylint: disable=too-many-instance-attributes,too-many-ar
         self._timer = None
         self.reset()
     def reset(self):
-        """Reset the game state for a new round."""
+        """Clear the playing field , a new round begins."""
         if self.level == "basic":
             self.answer = random.choice(self.words)
         else:
@@ -49,7 +49,8 @@ class HangmanEngine:   #pylint: disable=too-many-instance-attributes,too-many-ar
 
 
     def _mask_word(self):
-        """Return the current masked word/phrase with guessed letters revealed."""
+        """Give back the existing masked word/phrase beside 
+        the letters that have been gussed back. """
         return "".join(
             c if c == " " or c.lower() in self.guessed else "_"
             for c in self.answer
@@ -57,9 +58,9 @@ class HangmanEngine:   #pylint: disable=too-many-instance-attributes,too-many-ar
 
     def start_timer(self, on_timeout_callback):
         """
-        Start countdown timer for a guess.
+        Begin countdown timer to make a guess.
 
-        :param on_timeout_callback: function to call if time runs out
+        param on timeout callback:call to make in case of time expiry.
         """
         self.cancel_timer()
         self._timeout_flag = False
