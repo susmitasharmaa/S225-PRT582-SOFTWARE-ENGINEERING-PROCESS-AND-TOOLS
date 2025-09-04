@@ -9,7 +9,7 @@ import msvcrt  # Windows-specific module for keyboard input
 from hangman import HangmanEngine
 
 
-def play_game():
+def play_game():   # pylint: disable=too-many-branches
     """Run Hangman CLI game."""
     print("Welcome to Hangman!\n")
 
@@ -81,7 +81,5 @@ def play_game():
         if again != "y":
             print("Thanks for playing. Goodbye!")
             break
-
-
 if __name__ == "__main__":
     play_game()

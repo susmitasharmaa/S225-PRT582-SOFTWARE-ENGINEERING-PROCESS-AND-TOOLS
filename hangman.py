@@ -7,7 +7,7 @@ import random
 import threading
 
 
-class HangmanEngine:
+class HangmanEngine:   #pylint: disable=too-many-instance-attributes,too-many-arguments,too-many-positional-arguments
     """Hangman game engine class for managing game logic."""
 
     def __init__(self, words=None, phrases=None, lives=6, time_limit=15, level="basic"):
@@ -32,22 +32,21 @@ class HangmanEngine:
         self._timeout_flag = False
         self._timer = None
         self.reset()
-
     def reset(self):
-        # Pick a new word/phrase depending on the level
+        """Reset the game state for a new round."""
         if self.level == "basic":
             self.answer = random.choice(self.words)
         else:
             self.answer = random.choice(self.phrases)
 
 
-        """Reset the game state for a new round."""
         self.answer = random.choice(self.words if self.level == "basic" else self.phrases)
         self.guessed = set()               # letters already guessed
         self.remaining_lives = self.lives  # lives remaining
         self.revealed = self._mask_word()  # masked word/phrase
         self._timeout_flag = False         # timeout tracker
         self._timer = None                 # threading.Timer instance
+
 
     def _mask_word(self):
         """Return the current masked word/phrase with guessed letters revealed."""
@@ -84,7 +83,6 @@ class HangmanEngine:
     def timed_out(self):
         """Deduct one life due to timeout."""
         self.remaining_lives -= 1
-
     def guess(self, letter):
         """
         Handle a player's guess.

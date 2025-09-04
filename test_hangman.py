@@ -2,7 +2,7 @@
 Unit tests for HangmanEngine using Pytest.
 """
 
-import pytest
+
 from hangman import HangmanEngine
 
 
@@ -24,7 +24,7 @@ def test_correct_guess_reveals():
     """Test that a correct guess reveals letters."""
     g = HangmanEngine(words=["hello"], level="basic")
     g.reset()
-    res, msg = g.guess("h")
+    res, _ = g.guess("h")
     assert res is True
     assert g.revealed.startswith("h")
 
