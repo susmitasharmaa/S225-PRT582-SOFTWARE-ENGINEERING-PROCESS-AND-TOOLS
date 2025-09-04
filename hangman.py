@@ -25,9 +25,22 @@ class HangmanEngine:
         self.lives = lives
         self.time_limit = time_limit
         self.level = level
+        self.answer = None
+        self.guessed = set()
+        self.remaining_lives = self.lives
+        self.revealed = None
+        self._timeout_flag = False
+        self._timer = None
         self.reset()
 
     def reset(self):
+        # Pick a new word/phrase depending on the level
+        if self.level == "basic":
+            self.answer = random.choice(self.words)
+        else:
+            self.answer = random.choice(self.phrases)
+
+
         """Reset the game state for a new round."""
         self.answer = random.choice(self.words if self.level == "basic" else self.phrases)
         self.guessed = set()               # letters already guessed

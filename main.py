@@ -67,7 +67,7 @@ def play_game():
                 if guess == "quit":
                     print("Quitting game. The answer was:", game.answer)
                     return
-                result, msg = game.guess(guess)
+                _, msg = game.guess(guess)
                 print(msg)
 
         # Game result

@@ -24,7 +24,7 @@ def test_correct_guess_reveals():
     """Test that a correct guess reveals letters."""
     g = HangmanEngine(words=["hello"], level="basic")
     g.reset()
-    res, _ = g.guess("h")
+    res, msg = g.guess("h")
     assert res is True
     assert g.revealed.startswith("h")
 
@@ -51,7 +51,7 @@ def test_game_lost():
     """Test losing condition when lives run out."""
     g = HangmanEngine(words=["hi"], lives=1, level="basic")
     g.reset()
-    g.guess("z")
+    _ = g.guess("z")
     assert g.is_lost() is True
 
 
